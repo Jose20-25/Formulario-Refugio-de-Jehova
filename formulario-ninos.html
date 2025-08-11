@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Niños - Iglesia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e8ed;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Volver</a>
+    
+    <div class="container">
+        <div class="header">
+            <div class="form-icon">🧸</div>
+            <h1>Registro de Niños</h1>
+            <p class="subtitle">Formulario para niños de 0 a 12 años</p>
+        </div>
+
+        <form id="formularioNinos" action="#" method="POST">
+            <!-- Información del Niño -->
+            <div class="form-section">
+                <h2 class="section-title">👶 Información del Niño</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombres">Nombres <span class="required">*</span></label>
+                        <input type="text" id="nombres" name="nombres" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos <span class="required">*</span></label>
+                        <input type="text" id="apellidos" name="apellidos" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento <span class="required">*</span></label>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género <span class="required">*</span></label>
+                        <select id="genero" name="genero" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lugarNacimiento">Lugar de Nacimiento</label>
+                        <input type="text" id="lugarNacimiento" name="lugarNacimiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="grado">Grado Escolar</label>
+                        <select id="grado" name="grado">
+                            <option value="">Seleccionar...</option>
+                            <option value="preescolar">Preescolar</option>
+                            <option value="1ro">1° Primaria</option>
+                            <option value="2do">2° Primaria</option>
+                            <option value="3ro">3° Primaria</option>
+                            <option value="4to">4° Primaria</option>
+                            <option value="5to">5° Primaria</option>
+                            <option value="6to">6° Primaria</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="iglesia">Iglesia <span class="required">*</span></label>
+                    <select id="iglesia" name="iglesia" required>
+                        <option value="">Seleccionar iglesia...</option>
+                        <option value="central">Iglesia Central</option>
+                        <option value="la_tekera">Filial La Tekera</option>
+                        <option value="el_pital">Filial El Pital</option>
+                        <option value="el_sauce">Filial El Sauce</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Información de los Padres -->
+            <div class="form-section">
+                <h2 class="section-title">👨‍👩‍👧‍👦 Información de los Padres/Tutores</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombrePadre">Nombre del Padre <span class="required">*</span></label>
+                        <input type="text" id="nombrePadre" name="nombrePadre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreMadre">Nombre de la Madre <span class="required">*</span></label>
+                        <input type="text" id="nombreMadre" name="nombreMadre" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefonoPadre">Teléfono del Padre</label>
+                        <input type="tel" id="telefonoPadre" name="telefonoPadre">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoMadre">Teléfono de la Madre</label>
+                        <input type="tel" id="telefonoMadre" name="telefonoMadre">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailPadres">Email de Contacto <span class="required">*</span></label>
+                    <input type="email" id="emailPadres" name="emailPadres" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección Completa <span class="required">*</span></label>
+                    <textarea id="direccion" name="direccion" required></textarea>
+                </div>
+            </div>
+
+            <!-- Información Médica -->
+            <div class="form-section">
+                <h2 class="section-title">🏥 Información Médica</h2>
+                
+                <div class="form-group">
+                    <label for="alergias">Alergias (especificar)</label>
+                    <textarea id="alergias" name="alergias" placeholder="Mencione cualquier alergia alimentaria, medicamentos, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="medicamentos">Medicamentos que toma regularmente</label>
+                    <textarea id="medicamentos" name="medicamentos"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactoEmergencia">Contacto de Emergencia</label>
+                    <input type="text" id="contactoEmergencia" name="contactoEmergencia" placeholder="Nombre y teléfono">
+                </div>
+            </div>
+
+            <!-- Observaciones -->
+            <div class="form-section">
+                <h2 class="section-title">📝 Observaciones Adicionales</h2>
+                
+                <div class="form-group">
+                    <label for="observaciones">Información adicional que considere importante</label>
+                    <textarea id="observaciones" name="observaciones" placeholder="Personalidad del niño, necesidades especiales, miedos, gustos, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="autorizacion">
+                        <input type="checkbox" id="autorizacion" name="autorizacion" required style="width: auto; margin-right: 10px;">
+                        Autorizo la participación de mi hijo/a en las actividades de la iglesia <span class="required">*</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Registrar Niño</button>
+                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E); margin-left: 15px;">
+                    📱 Enviar por WhatsApp
+                </button>
+                <button type="reset" class="reset-btn">Limpiar Formulario</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('formularioNinos').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Registro exitoso! Pronto nos pondremos en contacto con ustedes.');
+        });
+
+        // Validación de edad
+        document.getElementById('fechaNacimiento').addEventListener('change', function() {
+            const fechaNac = new Date(this.value);
+            const hoy = new Date();
+            const edad = Math.floor((hoy - fechaNac) / (365.25 * 24 * 60 * 60 * 1000));
+            
+            if (edad > 12) {
+                alert('Este formulario es para niños de 0 a 12 años. Por favor, use el formulario correspondiente.');
+                this.value = '';
+            }
+        });
+
+        // Función para enviar por WhatsApp
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            const form = document.getElementById('formularioNinos');
+            const formData = new FormData(form);
+            
+            // Verificar campos requeridos
+            const nombres = formData.get('nombres');
+            const apellidos = formData.get('apellidos');
+            const fechaNacimiento = formData.get('fechaNacimiento');
+            const genero = formData.get('genero');
+            const nombrePadre = formData.get('nombrePadre');
+            const nombreMadre = formData.get('nombreMadre');
+            const emailPadres = formData.get('emailPadres');
+            const direccion = formData.get('direccion');
+            const iglesia = formData.get('iglesia');
+            const autorizacion = formData.get('autorizacion');
+            
+            if (!nombres || !apellidos || !fechaNacimiento || !genero || !nombrePadre || !nombreMadre || !emailPadres || !direccion || !iglesia || !autorizacion) {
+                alert('Por favor, complete todos los campos obligatorios antes de enviar por WhatsApp.');
+                return;
+            }
+            
+            // Crear mensaje
+            let mensaje = '*REGISTRO DE NIÑO - IGLESIA*\n\n';
+            mensaje += '*👶 INFORMACIÓN DEL NIÑO:*\n';
+            mensaje += `• Nombres: ${nombres}\n`;
+            mensaje += `• Apellidos: ${apellidos}\n`;
+            mensaje += `• Fecha de Nacimiento: ${fechaNacimiento}\n`;
+            mensaje += `• Género: ${genero}\n`;
+            mensaje += `• Lugar de Nacimiento: ${formData.get('lugarNacimiento') || 'No especificado'}\n`;
+            mensaje += `• Grado Escolar: ${formData.get('grado') || 'No especificado'}\n`;
+            mensaje += `• Iglesia: ${formData.get('iglesia')}\n\n`;
+            
+            mensaje += '*👨‍👩‍👧‍👦 INFORMACIÓN DE LOS PADRES:*\n';
+            mensaje += `• Padre: ${nombrePadre}\n`;
+            mensaje += `• Madre: ${nombreMadre}\n`;
+            mensaje += `• Teléfono Padre: ${formData.get('telefonoPadre') || 'No especificado'}\n`;
+            mensaje += `• Teléfono Madre: ${formData.get('telefonoMadre') || 'No especificado'}\n`;
+            mensaje += `• Email: ${emailPadres}\n`;
+            mensaje += `• Dirección: ${direccion}\n\n`;
+            
+            mensaje += '*🏥 INFORMACIÓN MÉDICA:*\n';
+            mensaje += `• Alergias: ${formData.get('alergias') || 'Ninguna'}\n`;
+            mensaje += `• Medicamentos: ${formData.get('medicamentos') || 'Ninguno'}\n`;
+            mensaje += `• Contacto de Emergencia: ${formData.get('contactoEmergencia') || 'No especificado'}\n\n`;
+            
+            mensaje += '*📝 OBSERVACIONES:*\n';
+            mensaje += `${formData.get('observaciones') || 'Ninguna'}\n\n`;
+            
+            mensaje += '*✅ Autorización de participación: SÍ*';
+            
+            // Codificar mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            const numeroWhatsApp = '50379468807';
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+            
+            // Abrir WhatsApp
+            window.open(urlWhatsApp, '_blank');
+        });
+    </script>
+</body>
+</html>

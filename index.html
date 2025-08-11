@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Miembros - Iglesia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .welcome-message {
+            font-size: 1.2rem;
+            color: #5a6c7d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .forms-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ninos .form-icon {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+
+        .jovenes .form-icon {
+            background: linear-gradient(135deg, #4834d4, #686de0);
+        }
+
+        .adultos .form-icon {
+            background: linear-gradient(135deg, #00d2d3, #54a0ff);
+        }
+
+        .form-card h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .form-description {
+            color: #5a6c7d;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .register-btn:active {
+            transform: translateY(-1px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .welcome-message {
+                font-size: 1.1rem;
+            }
+
+            .forms-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .form-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .verse {
+            font-style: italic;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo/central.png" alt="Logo de la Iglesia">
+            </div>
+            <h1>Bienvenidos a Nuestra Iglesia</h1>
+            <p class="welcome-message">
+                Nos alegra tenerlos aquí. Como parte de nuestra comunidad de fe, invitamos a todos los miembros 
+                y visitantes a registrarse para mantenernos conectados y poder servirles mejor. 
+                Por favor, seleccionen el formulario correspondiente según su grupo de edad.
+            </p>
+        </header>
+
+        <div class="forms-section">
+            <div class="form-card ninos">
+                <div class="form-icon">🧸</div>
+                <h2>Registro para Niños</h2>
+                <p class="form-description">
+                    Formulario especial para nuestros pequeños de 0 a 12 años. 
+                    Incluye información sobre actividades infantiles, escuela dominical, 
+                    datos de los padres y necesidades especiales del menor.
+                </p>
+                <a href="formulario-ninos.html" class="register-btn">Registrar Niño</a>
+            </div>
+
+            <div class="form-card jovenes">
+                <div class="form-icon">🎓</div>
+                <h2>Registro para Jóvenes</h2>
+                <p class="form-description">
+                    Destinado a adolescentes y jóvenes de 13 a 17 años. 
+                    Incluye información sobre ministerios juveniles, actividades, 
+                    educación, intereses y formas de participación en la iglesia.
+                </p>
+                <a href="formulario-jovenes.html" class="register-btn">Registrar Joven</a>
+            </div>
+
+            <div class="form-card adultos">
+                <div class="form-icon">👥</div>
+                <h2>Registro para Adultos</h2>
+                <p class="form-description">
+                    Para adultos de 18 años en adelante. Incluye información personal, 
+                    familiar, ministerios de interés, talentos para servir, 
+                    experiencia cristiana y formas de contribuir a la comunidad.
+                </p>
+                <a href="formulario-adultos.html" class="register-btn">Registrar Adulto</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Sistema de Registro de Miembros - Iglesia</p>
+            <p class="verse">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos." - Mateo 18:20</p>
+        </footer>
+    </div>
+
+    <script>
+        // Agregar efecto de entrada suave
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.form-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // Efecto de entrada para el header
+            const header = document.querySelector('header');
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-30px)';
+            
+            setTimeout(() => {
+                header.style.transition = 'all 0.8s ease';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Agregar efecto de parallax sutil
+        document.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('body');
+            const speed = scrolled * 0.5;
+            parallax.style.backgroundPosition = `center ${speed}px`;
+        });
+    </script>
+</body>
+</html>

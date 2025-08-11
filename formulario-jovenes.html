@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Jóvenes - Iglesia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4834d4, #686de0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #4834d4;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row-three {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4834d4;
+            box-shadow: 0 0 0 3px rgba(72, 52, 212, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"], .radio-item input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .range-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .range-group input[type="range"] {
+            flex: 1;
+        }
+
+        .range-value {
+            background: #4834d4;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e8ed;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4834d4, #686de0);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .form-row, .form-row-three {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group, .radio-group {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Volver</a>
+    
+    <div class="container">
+        <div class="header">
+            <div class="form-icon">🎓</div>
+            <h1>Registro de Jóvenes</h1>
+            <p class="subtitle">Formulario para jóvenes de 13 a 17 años</p>
+        </div>
+
+        <form id="formularioJovenes" action="#" method="POST">
+            <!-- Información Personal -->
+            <div class="form-section">
+                <h2 class="section-title">👤 Información Personal</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombres">Nombres <span class="required">*</span></label>
+                        <input type="text" id="nombres" name="nombres" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos <span class="required">*</span></label>
+                        <input type="text" id="apellidos" name="apellidos" required>
+                    </div>
+                </div>
+
+                <div class="form-row-three">
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento <span class="required">*</span></label>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad</label>
+                        <input type="text" id="edad" name="edad" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género <span class="required">*</span></label>
+                        <select id="genero" name="genero" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="iglesia">Iglesia <span class="required">*</span></label>
+                    <select id="iglesia" name="iglesia" required>
+                        <option value="">Seleccionar iglesia...</option>
+                        <option value="central">Iglesia Central</option>
+                        <option value="la_tekera">Filial La Tekera</option>
+                        <option value="el_pital">Filial El Pital</option>
+                        <option value="el_sauce">Filial El Sauce</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Información Familiar -->
+            <div class="form-section">
+                <h2 class="section-title">👨‍👩‍👧‍👦 Información Familiar</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombrePadre">Nombre del Padre <span class="required">*</span></label>
+                        <input type="text" id="nombrePadre" name="nombrePadre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreMadre">Nombre de la Madre <span class="required">*</span></label>
+                        <input type="text" id="nombreMadre" name="nombreMadre" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactoEmergencia">Contacto de Emergencia <span class="required">*</span></label>
+                        <input type="text" id="contactoEmergencia" name="contactoEmergencia" required placeholder="Nombre de la persona">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoEmergencia">Teléfono de Emergencia <span class="required">*</span></label>
+                        <input type="tel" id="telefonoEmergencia" name="telefonoEmergencia" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Contacto -->
+            <div class="form-section">
+                <h2 class="section-title">📞 Información de Contacto</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Número de teléfono">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <textarea id="direccion" name="direccion" placeholder="Dirección completa de residencia"></textarea>
+                </div>
+            </div>
+
+            <!-- Educación y Trabajo -->
+            <div class="form-section">
+                <h2 class="section-title">📚 Educación y Trabajo</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nivelEducativo">Nivel Educativo Actual</label>
+                        <select id="nivelEducativo" name="nivelEducativo">
+                            <option value="">Seleccionar...</option>
+                            <option value="secundaria">Educación Secundaria</option>
+                            <option value="tecnico">Educación Técnica</option>
+                            <option value="universitario">Educación Universitaria</option>
+                            <option value="postgrado">Postgrado</option>
+                            <option value="trabajando">Trabajando</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="institucion">Institución/Empresa</label>
+                        <input type="text" id="institucion" name="institucion">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carrera">Carrera/Área de Estudio</label>
+                        <input type="text" id="carrera" name="carrera">
+                    </div>
+                    <div class="form-group">
+                        <label for="año">Año/Semestre</label>
+                        <input type="text" id="año" name="año">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información Espiritual -->
+            <div class="form-section">
+                <h2 class="section-title">✝️ Información Espiritual</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fechaConversion">Fecha de Conversión</label>
+                        <input type="date" id="fechaConversion" name="fechaConversion">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaBautismo">Fecha de Bautismo</label>
+                        <input type="date" id="fechaBautismo" name="fechaBautismo">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ministerio">Ministerio</label>
+                    <input type="text" id="ministerio" name="ministerio" placeholder="Ministerio en el que participa o desea participar">
+                </div>
+            </div>
+
+            <!-- Ministerios que Participa -->
+            <div class="form-section">
+                <h2 class="section-title">🙏 Ministerios que Participa</h2>
+                
+                <div class="form-group">
+                    <label>¿En qué ministerios participa?</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="alabanza" name="ministerios[]" value="alabanza">
+                            <label for="alabanza">Alabanza y Adoración</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ministerio_ninos" name="ministerios[]" value="ministerio_ninos">
+                            <label for="ministerio_ninos">Ministerio de Niños</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="ministerio_juvenil" name="ministerios[]" value="ministerio_juvenil">
+                            <label for="ministerio_juvenil">Ministerio Juvenil</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="evangelismo" name="ministerios[]" value="evangelismo">
+                            <label for="evangelismo">Evangelismo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cargoIglesia">Cargo dentro de la Iglesia</label>
+                    <input type="text" id="cargoIglesia" name="cargoIglesia" placeholder="Ej: Líder juvenil, Maestro de escuela dominical, Músico, etc.">
+                </div>
+            </div>
+
+            <!-- Información de Contacto de Emergencia -->
+            <div class="form-section">
+                <h2 class="section-title">🚨 Contacto de Emergencia</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombreEmergencia">Nombre del Contacto <span class="required">*</span></label>
+                        <input type="text" id="nombreEmergencia" name="nombreEmergencia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="relacionEmergencia">Relación contigo</label>
+                        <input type="text" id="relacionEmergencia" name="relacionEmergencia" placeholder="Padre, madre, hermano, etc.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefonoEmergencia">Teléfono de Emergencia <span class="required">*</span></label>
+                    <input type="tel" id="telefonoEmergencia" name="telefonoEmergencia" required>
+                </div>
+            </div>
+
+            <!-- Información Médica -->
+            <div class="form-section">
+                <h2 class="section-title">🏥 Información Médica</h2>
+                
+                <div class="form-group">
+                    <label for="condicionesMedicas">Condición médica especial</label>
+                    <textarea id="condicionesMedicas" name="condicionesMedicas" placeholder="Diabetes, asma, epilepsia, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="discapacidad">Discapacidad</label>
+                    <textarea id="discapacidad" name="discapacidad" placeholder="Mencione cualquier discapacidad física, intelectual o sensorial"></textarea>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Registrarse</button>
+                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E); margin-left: 15px;">
+                    📱 Enviar por WhatsApp
+                </button>
+                <button type="reset" class="reset-btn">Limpiar Formulario</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Esperar a que la página esté completamente cargada
+        document.addEventListener('DOMContentLoaded', function() {
+            // Validación de edad y cálculo automático
+            document.getElementById('fechaNacimiento').addEventListener('change', function() {
+                if (!this.value) return; // Si no hay fecha, no hacer nada
+                
+                const fechaNac = new Date(this.value + 'T00:00:00'); // Agregar hora para evitar problemas de zona horaria
+                const hoy = new Date();
+                
+                // Calcular edad más precisa
+                let edad = hoy.getFullYear() - fechaNac.getFullYear();
+                const mesActual = hoy.getMonth();
+                const diaActual = hoy.getDate();
+                const mesNacimiento = fechaNac.getMonth();
+                const diaNacimiento = fechaNac.getDate();
+                
+                // Ajustar si aún no ha cumplido años este año
+                if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+                    edad--;
+                }
+                
+                console.log('Fecha nacimiento:', this.value); // Para debugging
+                console.log('Fecha actual:', hoy.toLocaleDateString()); // Para debugging
+                console.log('Edad calculada:', edad); // Para debugging
+                
+                // Mostrar la edad calculada
+                const campoEdad = document.getElementById('edad');
+                if (campoEdad) {
+                    campoEdad.value = edad + ' años';
+                    console.log('Campo edad actualizado:', campoEdad.value); // Para debugging
+                }
+                
+                // Validar rango de edad
+                if (edad < 13 || edad > 17) {
+                    alert('Este formulario es para jóvenes de 13 a 17 años. Por favor, use el formulario correspondiente.');
+                    this.value = '';
+                    if (campoEdad) {
+                        campoEdad.value = '';
+                    }
+                }
+            });
+        });
+
+        document.getElementById('formularioJovenes').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Registro exitoso! Bienvenido/a a nuestra comunidad juvenil. Pronto nos pondremos en contacto contigo.');
+            
+            // Limpiar todos los campos del formulario
+            this.reset();
+            
+            // Limpiar específicamente el campo de edad que es readonly
+            document.getElementById('edad').value = '';
+        });
+
+        // Función para enviar por WhatsApp
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            const form = document.getElementById('formularioJovenes');
+            const formData = new FormData(form);
+            
+            // Verificar campos requeridos
+            const nombres = formData.get('nombres');
+            const apellidos = formData.get('apellidos');
+            const fechaNacimiento = formData.get('fechaNacimiento');
+            const genero = formData.get('genero');
+            const iglesia = formData.get('iglesia');
+            const nombrePadre = formData.get('nombrePadre');
+            const nombreMadre = formData.get('nombreMadre');
+            const contactoEmergencia = formData.get('contactoEmergencia');
+            const telefonoEmergencia = formData.get('telefonoEmergencia');
+            
+            if (!nombres || !apellidos || !fechaNacimiento || !genero || !iglesia || !nombrePadre || !nombreMadre || !contactoEmergencia || !telefonoEmergencia) {
+                alert('Por favor, complete todos los campos obligatorios antes de enviar por WhatsApp.');
+                return;
+            }
+            
+            // Crear mensaje
+            let mensaje = '*REGISTRO DE JOVEN - IGLESIA*\n\n';
+            mensaje += '*👤 INFORMACIÓN PERSONAL:*\n';
+            mensaje += `• Nombres: ${nombres}\n`;
+            mensaje += `• Apellidos: ${apellidos}\n`;
+            mensaje += `• Fecha de Nacimiento: ${fechaNacimiento}\n`;
+            mensaje += `• Edad: ${formData.get('edad') || 'No calculada'}\n`;
+            mensaje += `• Género: ${genero}\n`;
+            mensaje += `• Iglesia: ${formData.get('iglesia')}\n\n`;
+            
+            mensaje += '*👨‍👩‍👧‍👦 INFORMACIÓN FAMILIAR:*\n';
+            mensaje += `• Padre: ${nombrePadre}\n`;
+            mensaje += `• Madre: ${nombreMadre}\n`;
+            mensaje += `• Contacto de Emergencia: ${contactoEmergencia}\n`;
+            mensaje += `• Teléfono de Emergencia: ${telefonoEmergencia}\n\n`;
+            
+            // Información de contacto (opcional)
+            const telefono = formData.get('telefono');
+            const correo = formData.get('correo');
+            const direccion = formData.get('direccion');
+            if (telefono || correo || direccion) {
+                mensaje += '*📞 INFORMACIÓN DE CONTACTO:*\n';
+                if (telefono) mensaje += `• Teléfono: ${telefono}\n`;
+                if (correo) mensaje += `• Correo: ${correo}\n`;
+                if (direccion) mensaje += `• Dirección: ${direccion}\n`;
+                mensaje += '\n';
+            }
+            
+            // Educación y trabajo (opcional)
+            const nivelEducativo = formData.get('nivelEducativo');
+            const institucion = formData.get('institucion');
+            const carrera = formData.get('carrera');
+            const año = formData.get('año');
+            if (nivelEducativo || institucion || carrera || año) {
+                mensaje += '*📚 EDUCACIÓN Y TRABAJO:*\n';
+                if (nivelEducativo) mensaje += `• Nivel Educativo: ${nivelEducativo}\n`;
+                if (institucion) mensaje += `• Institución: ${institucion}\n`;
+                if (carrera) mensaje += `• Carrera/Área: ${carrera}\n`;
+                if (año) mensaje += `• Año/Semestre: ${año}\n`;
+                mensaje += '\n';
+            }
+            
+            // Información espiritual (opcional)
+            const fechaConversion = formData.get('fechaConversion');
+            const fechaBautismo = formData.get('fechaBautismo');
+            const ministerio = formData.get('ministerio');
+            if (fechaConversion || fechaBautismo || ministerio) {
+                mensaje += '*✝️ INFORMACIÓN ESPIRITUAL:*\n';
+                if (fechaConversion) mensaje += `• Fecha de Conversión: ${fechaConversion}\n`;
+                if (fechaBautismo) mensaje += `• Fecha de Bautismo: ${fechaBautismo}\n`;
+                if (ministerio) mensaje += `• Ministerio: ${ministerio}\n`;
+                mensaje += '\n';
+            }
+            
+            // Ministerios que participa
+            const ministerios = formData.getAll('ministerios[]');
+            const cargoIglesia = formData.get('cargoIglesia');
+            if (ministerios.length > 0 || cargoIglesia) {
+                mensaje += '*🙏 MINISTERIOS QUE PARTICIPA:*\n';
+                if (ministerios.length > 0) {
+                    mensaje += `• Ministerios: ${ministerios.join(', ')}\n`;
+                }
+                if (cargoIglesia) mensaje += `• Cargo en la Iglesia: ${cargoIglesia}\n`;
+                mensaje += '\n';
+            }
+            
+            // Información médica (opcional)
+            const condicionesMedicas = formData.get('condicionesMedicas');
+            const discapacidad = formData.get('discapacidad');
+            if (condicionesMedicas || discapacidad) {
+                mensaje += '*🏥 INFORMACIÓN MÉDICA:*\n';
+                if (condicionesMedicas) mensaje += `• Condición médica especial: ${condicionesMedicas}\n`;
+                if (discapacidad) mensaje += `• Discapacidad: ${discapacidad}\n`;
+                mensaje += '\n';
+            }
+            
+            mensaje += '*Registro completado exitosamente*';
+            
+            // Codificar mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            const numeroWhatsApp = '50379468807';
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+            
+            // Abrir WhatsApp
+            window.open(urlWhatsApp, '_blank');
+            
+            // Limpiar todos los campos del formulario después de enviar
+            form.reset();
+            
+            // Limpiar específicamente el campo de edad que es readonly
+            document.getElementById('edad').value = '';
+            
+            // Mostrar mensaje de confirmación
+            alert('¡Mensaje enviado a WhatsApp! El formulario ha sido limpiado.');
+        });
+    </script>
+</body>
+</html>
