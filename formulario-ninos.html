@@ -130,6 +130,24 @@
             background: white;
         }
 
+        input[type="date"] {
+            position: relative;
+            font-family: inherit;
+            color: #333;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            color: #ff6b6b;
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        input[type="date"]:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #ff6b6b;
@@ -250,7 +268,13 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="fechaNacimiento">Fecha de Nacimiento <span class="required">*</span></label>
-                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                        <input type="date" 
+                               id="fechaNacimiento" 
+                               name="fechaNacimiento" 
+                               required
+                               max="2025-08-14"
+                               min="2011-01-01"
+                               placeholder="dd/mm/aaaa">
                     </div>
                     <div class="form-group">
                         <label for="genero">Género <span class="required">*</span></label>
@@ -262,24 +286,9 @@
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="lugarNacimiento">Lugar de Nacimiento</label>
-                        <input type="text" id="lugarNacimiento" name="lugarNacimiento">
-                    </div>
-                    <div class="form-group">
-                        <label for="grado">Grado Escolar</label>
-                        <select id="grado" name="grado">
-                            <option value="">Seleccionar...</option>
-                            <option value="preescolar">Preescolar</option>
-                            <option value="1ro">1° Primaria</option>
-                            <option value="2do">2° Primaria</option>
-                            <option value="3ro">3° Primaria</option>
-                            <option value="4to">4° Primaria</option>
-                            <option value="5to">5° Primaria</option>
-                            <option value="6to">6° Primaria</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="lugarNacimiento">Lugar de Nacimiento</label>
+                    <input type="text" id="lugarNacimiento" name="lugarNacimiento">
                 </div>
 
                 <div class="form-group">
@@ -351,47 +360,100 @@
                 </div>
             </div>
 
-            <!-- Observaciones -->
+            <!-- Información Escolar -->
             <div class="form-section">
-                <h2 class="section-title">📝 Observaciones Adicionales</h2>
+                <h2 class="section-title">🎓 Información Escolar</h2>
                 
-                <div class="form-group">
-                    <label for="observaciones">Información adicional que considere importante</label>
-                    <textarea id="observaciones" name="observaciones" placeholder="Personalidad del niño, necesidades especiales, miedos, gustos, etc."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="autorizacion">
-                        <input type="checkbox" id="autorizacion" name="autorizacion" required style="width: auto; margin-right: 10px;">
-                        Autorizo la participación de mi hijo/a en las actividades de la iglesia <span class="required">*</span>
-                    </label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="institucionAcademica">Institución Académica</label>
+                        <input type="text" id="institucionAcademica" name="institucionAcademica" placeholder="Nombre del colegio, escuela o institución">
+                    </div>
+                    <div class="form-group">
+                        <label for="grado">Grado</label>
+                        <select id="grado" name="grado">
+                            <option value="">Seleccionar...</option>
+                            <option value="preescolar">Preescolar</option>
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="1er_grado">1er Grado</option>
+                            <option value="2do_grado">2do Grado</option>
+                            <option value="3er_grado">3er Grado</option>
+                            <option value="4to_grado">4to Grado</option>
+                            <option value="5to_grado">5to Grado</option>
+                            <option value="6to_grado">6to Grado</option>
+                            <option value="7mo_grado">7mo Grado</option>
+                            <option value="no_estudia">No estudia actualmente</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <div class="submit-section">
-                <button type="submit" class="submit-btn">Registrar Niño</button>
-                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E); margin-left: 15px;">
+                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E);">
                     📱 Enviar por WhatsApp
                 </button>
-                <button type="reset" class="reset-btn">Limpiar Formulario</button>
             </div>
         </form>
     </div>
 
     <script>
-        document.getElementById('formularioNinos').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Registro exitoso! Pronto nos pondremos en contacto con ustedes.');
+        // Mejorar la experiencia del campo de fecha
+        document.addEventListener('DOMContentLoaded', function() {
+            const fechaNacimiento = document.getElementById('fechaNacimiento');
+            
+            // Establecer fecha máxima automáticamente (hoy)
+            const hoy = new Date();
+            const fechaHoy = hoy.toISOString().split('T')[0];
+            fechaNacimiento.setAttribute('max', fechaHoy);
+            
+            // Establecer fecha mínima (hace 13 años para cubrir 0-12)
+            const hace13Anos = new Date();
+            hace13Anos.setFullYear(hoy.getFullYear() - 13);
+            const fechaMinima = hace13Anos.toISOString().split('T')[0];
+            fechaNacimiento.setAttribute('min', fechaMinima);
+            
+            // Agregar evento para prevenir el comportamiento problemático
+            fechaNacimiento.addEventListener('input', function(e) {
+                // Permitir que el navegador maneje la entrada normalmente
+                console.log('Fecha seleccionada:', this.value);
+            });
         });
 
-        // Validación de edad
+        // Validación de edad mejorada
         document.getElementById('fechaNacimiento').addEventListener('change', function() {
-            const fechaNac = new Date(this.value);
-            const hoy = new Date();
-            const edad = Math.floor((hoy - fechaNac) / (365.25 * 24 * 60 * 60 * 1000));
+            if (!this.value) {
+                return; // Si no hay valor, no validar
+            }
             
-            if (edad > 12) {
-                alert('Este formulario es para niños de 0 a 12 años. Por favor, use el formulario correspondiente.');
+            try {
+                const fechaNac = new Date(this.value + 'T00:00:00'); // Agregar hora para evitar problemas de zona horaria
+                const hoy = new Date();
+                
+                // Verificar que la fecha sea válida
+                if (isNaN(fechaNac.getTime())) {
+                    alert('Por favor, ingrese una fecha válida.');
+                    this.value = '';
+                    return;
+                }
+                
+                // Calcular edad más precisa
+                let edad = hoy.getFullYear() - fechaNac.getFullYear();
+                const mesActual = hoy.getMonth();
+                const diaActual = hoy.getDate();
+                const mesNacimiento = fechaNac.getMonth();
+                const diaNacimiento = fechaNac.getDate();
+                
+                // Ajustar si aún no ha cumplido años este año
+                if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+                    edad--;
+                }
+                
+                if (edad > 12 || edad < 0) {
+                    alert('Este formulario es para niños de 0 a 12 años. Por favor, use el formulario correspondiente.');
+                    this.value = '';
+                }
+            } catch (error) {
+                alert('Error al procesar la fecha. Por favor, intente nuevamente.');
                 this.value = '';
             }
         });
@@ -411,9 +473,8 @@
             const emailPadres = formData.get('emailPadres');
             const direccion = formData.get('direccion');
             const iglesia = formData.get('iglesia');
-            const autorizacion = formData.get('autorizacion');
             
-            if (!nombres || !apellidos || !fechaNacimiento || !genero || !nombrePadre || !nombreMadre || !emailPadres || !direccion || !iglesia || !autorizacion) {
+            if (!nombres || !apellidos || !fechaNacimiento || !genero || !nombrePadre || !nombreMadre || !emailPadres || !direccion || !iglesia) {
                 alert('Por favor, complete todos los campos obligatorios antes de enviar por WhatsApp.');
                 return;
             }
@@ -426,7 +487,6 @@
             mensaje += `• Fecha de Nacimiento: ${fechaNacimiento}\n`;
             mensaje += `• Género: ${genero}\n`;
             mensaje += `• Lugar de Nacimiento: ${formData.get('lugarNacimiento') || 'No especificado'}\n`;
-            mensaje += `• Grado Escolar: ${formData.get('grado') || 'No especificado'}\n`;
             mensaje += `• Iglesia: ${formData.get('iglesia')}\n\n`;
             
             mensaje += '*👨‍👩‍👧‍👦 INFORMACIÓN DE LOS PADRES:*\n';
@@ -442,10 +502,17 @@
             mensaje += `• Medicamentos: ${formData.get('medicamentos') || 'Ninguno'}\n`;
             mensaje += `• Contacto de Emergencia: ${formData.get('contactoEmergencia') || 'No especificado'}\n\n`;
             
-            mensaje += '*📝 OBSERVACIONES:*\n';
-            mensaje += `${formData.get('observaciones') || 'Ninguna'}\n\n`;
+            // Información escolar
+            const institucionAcademica = formData.get('institucionAcademica');
+            const grado = formData.get('grado');
+            if (institucionAcademica || grado) {
+                mensaje += '*🎓 INFORMACIÓN ESCOLAR:*\n';
+                if (institucionAcademica) mensaje += `• Institución: ${institucionAcademica}\n`;
+                if (grado) mensaje += `• Grado: ${grado}\n`;
+                mensaje += '\n';
+            }
             
-            mensaje += '*✅ Autorización de participación: SÍ*';
+            mensaje += '*Registro completado exitosamente*';
             
             // Codificar mensaje para URL
             const mensajeCodificado = encodeURIComponent(mensaje);

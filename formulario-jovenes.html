@@ -476,11 +476,9 @@
             </div>
 
             <div class="submit-section">
-                <button type="submit" class="submit-btn">Registrarse</button>
-                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E); margin-left: 15px;">
+                <button type="button" class="submit-btn" id="whatsappBtn" style="background: linear-gradient(135deg, #25D366, #128C7E);">
                     📱 Enviar por WhatsApp
                 </button>
-                <button type="reset" class="reset-btn">Limpiar Formulario</button>
             </div>
         </form>
     </div>
@@ -488,56 +486,36 @@
     <script>
         // Esperar a que la página esté completamente cargada
         document.addEventListener('DOMContentLoaded', function() {
-            // Validación de edad y cálculo automático
-            document.getElementById('fechaNacimiento').addEventListener('change', function() {
-                if (!this.value) return; // Si no hay fecha, no hacer nada
+            // Cálculo simple de edad sin restricciones
+            const fechaNacInput = document.getElementById('fechaNacimiento');
+            
+            // Solo calcular edad al cambiar el campo, sin validaciones
+            fechaNacInput.addEventListener('change', function() {
+                if (!this.value) return;
                 
-                const fechaNac = new Date(this.value + 'T00:00:00'); // Agregar hora para evitar problemas de zona horaria
-                const hoy = new Date();
-                
-                // Calcular edad más precisa
-                let edad = hoy.getFullYear() - fechaNac.getFullYear();
-                const mesActual = hoy.getMonth();
-                const diaActual = hoy.getDate();
-                const mesNacimiento = fechaNac.getMonth();
-                const diaNacimiento = fechaNac.getDate();
-                
-                // Ajustar si aún no ha cumplido años este año
-                if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
-                    edad--;
-                }
-                
-                console.log('Fecha nacimiento:', this.value); // Para debugging
-                console.log('Fecha actual:', hoy.toLocaleDateString()); // Para debugging
-                console.log('Edad calculada:', edad); // Para debugging
-                
-                // Mostrar la edad calculada
-                const campoEdad = document.getElementById('edad');
-                if (campoEdad) {
-                    campoEdad.value = edad + ' años';
-                    console.log('Campo edad actualizado:', campoEdad.value); // Para debugging
-                }
-                
-                // Validar rango de edad
-                if (edad < 13 || edad > 17) {
-                    alert('Este formulario es para jóvenes de 13 a 17 años. Por favor, use el formulario correspondiente.');
-                    this.value = '';
-                    if (campoEdad) {
-                        campoEdad.value = '';
+                try {
+                    const fechaNac = new Date(this.value);
+                    const hoy = new Date();
+                    
+                    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+                    const mesActual = hoy.getMonth();
+                    const diaActual = hoy.getDate();
+                    const mesNacimiento = fechaNac.getMonth();
+                    const diaNacimiento = fechaNac.getDate();
+                    
+                    if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+                        edad--;
                     }
+                    
+                    // Solo mostrar la edad calculada, sin validaciones
+                    const campoEdad = document.getElementById('edad');
+                    if (campoEdad) {
+                        campoEdad.value = edad + ' años';
+                    }
+                } catch (error) {
+                    console.log('Error calculando edad:', error);
                 }
             });
-        });
-
-        document.getElementById('formularioJovenes').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Registro exitoso! Bienvenido/a a nuestra comunidad juvenil. Pronto nos pondremos en contacto contigo.');
-            
-            // Limpiar todos los campos del formulario
-            this.reset();
-            
-            // Limpiar específicamente el campo de edad que es readonly
-            document.getElementById('edad').value = '';
         });
 
         // Función para enviar por WhatsApp
